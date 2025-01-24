@@ -5,15 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
     <link rel="stylesheet" href="{% static 'delivery/css/styles.css' %}">
-    <title>Document</title>
+    <title>Admin HOME</title>
 </head>
 <body>
-    <h1>LOGIN SUCCESS</h1>
-    <a href="restaurant_page/">Add new Restaurant</a>
+
+    <h1>Welcome ADMIN!</h1>
+    <a href="{% url 'add_restaurant_page' %}">Add new Restaurant</a>
     <a href="{% url 'show_restaurant_page' %}">Show Restaurants</a>
 
-
-    <a>Update Restaurant Info</a>
-    <a>Delete Restaurant</a>
 </body>
 </html>
