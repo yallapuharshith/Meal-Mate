@@ -1,4 +1,4 @@
-""
+"""
 WSGI config for meal_mate project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
