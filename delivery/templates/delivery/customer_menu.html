@@ -6,203 +6,223 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'delivery/css/styles.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <title>My Favorite Restaurants</title>
+    <title>{{ restaurant.name }} - Menu</title>
     <style>
         :root {
-            --primary: #528FF0;
-            --secondary: #2A9D8F;
+            --primary: #2A9D8F;
+            --secondary: #264653;
             --accent: #E9C46A;
             --light: #F8F9FA;
             --dark: #212529;
-            --gray: #6c757d;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--light);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        h1 {
-            font-size: 32px;
             color: var(--dark);
-            margin-bottom: 20px;
-            font-weight: 600;
+            line-height: 1.6;
         }
 
         .container {
-            width: 90%;
             max-width: 1200px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin: 2rem auto;
+            padding: 2rem;
         }
 
-        .welcome-message {
-            font-size: 18px;
-            color: var(--gray);
-            margin-bottom: 30px;
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
         }
 
-        table {
+        .restaurant-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .restaurant-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 1rem 0;
+            border: 4px solid var(--accent);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns */
+            gap: 2rem;
+            padding: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns on smaller screens */
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .menu-grid {
+                grid-template-columns: 1fr; /* 1 column on mobile */
+            }
+        }
+        
+        .menu-item {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        
+
+        .item-image {
             width: 100%;
-            border-collapse: collapse;
-            margin: 0 auto;
-            background-color: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            height: 200px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
         }
 
-        th, td {
-            padding: 15px;
-            text-align: left;
-            font-size: 16px;
-            border-bottom: 1px solid #e9ecef;
+        .cart-btn {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s ease;
         }
 
-        th {
-            background-color: var(--primary);
+        .cart-btn:hover {
+            background: #228176;
+        }
+
+        .price-tag {
+            background: var(--accent);
+            color: var(--secondary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 1rem;
+            font-weight: 600;
+            display: inline-block;
+            margin: 0.5rem 0;
+        }
+
+        .veg-indicator {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-left: 0.5rem;
+        }
+
+        .veg {
+            background: #2A9D8F;
+        }
+
+        .non-veg {
+            background: #E76F51;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 0.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            background: var(--primary);
             color: white;
             font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease;
         }
 
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        tr:hover {
-            background-color: #f1f1f1;
-            transition: background-color 0.3s ease;
-        }
-
-        img {
-            border-radius: 8px;
-            width: 100px;
-            height: 80px;
-            object-fit: cover;
-        }
-
-        a {
-            font-size: 14px;
-            color: var(--primary);
-            text-decoration: none;
-            padding: 8px 16px;
-            background-color: rgba(82, 143, 240, 0.1);
-            border-radius: 6px;
-            transition: all 0.3s ease;
-        }
-
-        a:hover {
-            background-color: var(--primary);
-            color: white;
+        .add-to-cart:hover {
+            background: #228176;
         }
 
         .footer {
             text-align: center;
-            font-size: 14px;
-            color: var(--gray);
-            margin-top: 40px;
-            padding: 20px 0;
-            border-top: 1px solid #e9ecef;
-            width: 100%;
+            margin-top: 3rem;
+            padding: 2rem 0;
+            color: #6c757d;
+            border-top: 1px solid #dee2e6;
         }
 
         @media (max-width: 768px) {
-            h1 {
-                font-size: 28px;
-            }
-
             .container {
-                padding: 15px;
+                padding: 1rem;
             }
-
-            th, td {
-                padding: 12px;
-                font-size: 14px;
-            }
-
-            img {
-                width: 80px;
-                height: 60px;
-            }
-
-            a {
-                padding: 6px 12px;
-                font-size: 12px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 24px;
-            }
-
-            .container {
-                padding: 10px;
-            }
-
-            th, td {
-                padding: 10px;
-                font-size: 12px;
-            }
-
-            img {
-                width: 60px;
-                height: 50px;
-            }
-
-            a {
-                padding: 4px 8px;
-                font-size: 10px;
+            
+            .menu-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
+    <a href="{% url 'show_cart_page' username %}" class="cart-btn">
+        🛒 View Cart <span class="cart-count">({{ cart_items_count }})</span>
+    </a>
 
     <div class="container">
-        <p class="welcome-message">Welcome, <strong>{{ username }}</strong>!</p>
-        <h1>My Favorite Restaurants</h1>
+        <div class="restaurant-card">
+            <h1>{{ restaurant.name }}</h1>
+            <h3>{{ restaurant.cuisine }} Cuisine</h3>
+            <img src="{{ restaurant.picture }}" alt="{{ restaurant.name }}" class="restaurant-image">
+            <p class="welcome-message">Welcome back, {{ username }}! 👋</p>
+        </div>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Picture</th>
-                    <th>Name</th>
-                    <th>Cuisine</th>
-                    <th>Rating</th>
-                    <th>Explore</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for restaurant in restaurants %}
-                <tr>
-                    <td>
-                        <img src="{{ restaurant.picture }}" alt="Picture of {{ restaurant.name }}">
-                    </td>
-                    <td>{{ restaurant.name }}</td>
-                    <td>{{ restaurant.cuisine }}</td>
-                    <td>{{ restaurant.rating }}/5</td>
-                    <td>
-                        <a href="{% url 'customer_menu' restaurant.id username %}">View Menu</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="menu-grid">
+            {% for item in menu_items %}
+            <div class="menu-item">
+                <img src="{{ item.picture }}" alt="{{ item.name }}" class="item-image">
+                <h3>{{ item.name }}</h3>
+                <p class="description">{{ item.description }}</p>
+                <div class="price-tag">₹{{ item.price }}</div>
+                <div class="dietary-info">
+                    {% if item.is_veg %}
+                        <span class="veg-indicator veg"></span>Veg
+                    {% else %}
+                        <span class="veg-indicator non-veg"></span>Non-Veg
+                    {% endif %}
+                </div>
+                <form method="POST" action="{% url 'add_to_cart' item.id username %}">
+                    {% csrf_token %}
+                    <button type="submit" class="add-to-cart">Add to Cart</button>
+                </form>
+            </div>
+            {% empty %}
+            <div class="empty-state">
+                <p>No menu items available at the moment 🍽️</p>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 
-    <div class="footer">
-        <p>&copy; 2025 Meal Mate. All Rights Reserved.</p>
-    </div>
-
+    <footer class="footer">
+        <p>© 2025 Meal Mate. All Rights Reserved.</p>
+    </footer>
 </body>
 </html>
