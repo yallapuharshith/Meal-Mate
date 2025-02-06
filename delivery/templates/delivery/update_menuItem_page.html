@@ -5,30 +5,134 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
     <link rel="stylesheet" href="{% static 'delivery/css/styles.css' %}">
-    <title>Document</title>
+    <title>Update Menu Item</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 5px;
+            display: block;
+            text-align: left;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1em;
+            color: #333;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #528FF0;
+        }
+
+        textarea {
+            resize: none;
+            height: 80px;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            margin-bottom: 15px;
+        }
+
+        .checkbox-container label {
+            margin-left: 10px;
+            font-size: 1em;
+            color: #555;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #528FF0;
+            color: white;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #4171c1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            input, button, textarea {
+                font-size: 1em;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h2>Update Menu Item</h2>
-    <form method="POST" action="{% url 'update_menuItem' item.id %}">
-        {% csrf_token %}
-        <label for="name">Item Name:</label>
-        <input type="text" id="name" name="name" value="{{item.name}}" required><br><br>
+    <div class="container">
+        <h2>Update Menu Item</h2>
+        <form method="POST" action="{% url 'update_menuItem' item.id %}">
+            {% csrf_token %}
+            
+            <label for="name">Item Name:</label>
+            <input type="text" id="name" name="name" value="{{ item.name }}" required>
 
-        <label for="description">Description:</label>
-        <textarea id="description" name="description" required>
-            {{item.description}}
-        </textarea><br><br>
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required>{{ item.description }}</textarea>
 
-        <label for="price">Price:</label>
-        <input type="number" id="price" name="price" step="0.01" value="{{item.price}}" required><br><br>
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" step="0.01" value="{{ item.price }}" required>
 
-        <label for="is_veg">Vegetarian:</label>
-        <input type="checkbox" id="is_veg" name="is_veg" value="{{item.is_veg}}"><br><br>
+            <div class="checkbox-container">
+                <input type="checkbox" id="is_veg" name="is_veg" {% if item.is_veg %}checked{% endif %}>
+                <label for="is_veg">Vegetarian</label>
+            </div>
 
-        <label for="picture">Image URL:</label>
-        <input type="url" id="picture" name="picture" value="{{item.picture}}"><br><br>
+            <label for="picture">Image URL:</label>
+            <input type="url" id="picture" name="picture" value="{{ item.picture }}">
 
-        <button type="submit">Update Item</button>
-    </form>
+            <button type="submit">Update Item</button>
+        </form>
+    </div>
 </body>
 </html>
