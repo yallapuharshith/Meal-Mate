@@ -5,25 +5,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
     <link rel="stylesheet" href="{% static 'delivery/css/styles.css' %}">
-    <title>Document</title>
+    <title>Add Restaurant</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 26px;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-size: 16px;
+            color: #555;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"], input[type="url"], input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        input[type="text"]:focus, input[type="url"]:focus, input[type="number"]:focus {
+            border-color: #528FF0;
+            outline: none;
+        }
+
+        button {
+            background-color: #528FF0;
+            color: #fff;
+            font-size: 16px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #4171c1;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #aaa;
+        }
+    </style>
 </head>
 <body>
-    <form method="POST" action="{% url 'add_restaurant' %}">
-        {% csrf_token %}
-        <label for="name">Restaurant Name:</label>
-        <input type="text" id="name" name="name" required><br><br>
-    
-        <label for="picture">Picture URL:</label>
-        <input type="url" id="picture" name="picture"><br><br>
-    
-        <label for="cuisine">Cuisine:</label>
-        <input type="text" id="cuisine" name="cuisine" required><br><br>
-    
-        <label for="rating">Rating:</label>
-        <input type="number" id="rating" name="rating" step="0.1" min="0" max="5" required><br><br>
-    
-        <button type="submit">Add Restaurant</button>
-    </form>
+
+    <div class="form-container">
+        <h1>Add Restaurant</h1>
+        <form method="POST" action="{% url 'add_restaurant' %}">
+            {% csrf_token %}
+            <label for="name">Restaurant Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+
+            <label for="picture">Picture URL:</label>
+            <input type="url" id="picture" name="picture"><br><br>
+
+            <label for="cuisine">Cuisine:</label>
+            <input type="text" id="cuisine" name="cuisine" required><br><br>
+
+            <label for="rating">Rating:</label>
+            <input type="number" id="rating" name="rating" step="0.1" min="0" max="5" required><br><br>
+
+            <button type="submit">Add Restaurant</button>
+        </form>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 Meal Mate. All Rights Reserved.</p>
+    </div>
     
 </body>
 </html>
