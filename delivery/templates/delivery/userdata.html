@@ -5,38 +5,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
     <link rel="stylesheet" href="{% static 'delivery/css/styles.css' %}">
-    <title>Document</title>
+    <title>User Information</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
 </head>
 <body>
-    <table border>
-        <thead>
-            <tr>
-                <th>Info</th>
-                <th>Data</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th>Username</th>
-                <th>{{username}}</th>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <th>{{password}}</th>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <th>{{email}}</th>
-            </tr>
-            <tr>
-                <th>Mobile</th>
-                <th>{{mobile}}</th>
-            </tr>
-            <tr>
-                <th>Address</th>
-                <th>{{address}}</th>
-            </tr>
-        </tbody>
-    </table>
+    <div class="container">
+        <h2>User Information</h2>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Username</th>
+                    <td>{{ username }}</td>
+                </tr>
+                <tr>
+                    <th>Password</th>
+                    <td>{{ password }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ email }}</td>
+                </tr>
+                <tr>
+                    <th>Mobile</th>
+                    <td>{{ mobile }}</td>
+                </tr>
+                <tr>
+                    <th>Address</th>
+                    <td>{{ address }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/" class="back-btn">Back to Home</a>
+    </div>
 </body>
 </html>
