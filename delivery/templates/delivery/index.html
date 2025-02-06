@@ -5,11 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
     <link rel="stylesheet" href="{% static 'delivery/css/styles.css' %}">
-    <title>Welcome page</title>
+    <title>Welcome to Meal-Mate</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+
+        h2 {
+            font-size: 40px;
+            color: #528FF0;
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        a {
+            display: inline-block;
+            font-size: 18px;
+            color: white;
+            text-decoration: none;
+            background-color: #528FF0;
+            padding: 12px 25px;
+            border-radius: 8px;
+            margin: 10px 0;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        a:hover {
+            background-color: #4171c1;
+            transform: scale(1.05);
+        }
+
+        .links-container {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer {
+            font-size: 14px;
+            color: #aaa;
+            margin-top: 30px;
+        }
+    </style>
 </head>
 <body>
+
     <h2>Welcome to Meal-Mate</h2>
-    <a href="signin/">SIGN IN</a>
-    <a href="signup/">SIGN UP</a>
+
+    <div class="links-container">
+        <a href="signin/">SIGN IN</a>
+        <a href="signup/">SIGN UP</a>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 Meal Mate. All Rights Reserved.</p>
+    </div>
+
 </body>
 </html>
