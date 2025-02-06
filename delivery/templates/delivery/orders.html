@@ -6,20 +6,119 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'delivery/css/styles.css' %}">
     <title>Order Summary</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background-color: #528FF0;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-summary p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .order-summary a {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: #528FF0;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .order-summary a:hover {
+            background-color: #4171c1;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f7fc;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Thank you for your order, {{ username }}!</h1>
 
+    <header>
+        <h1>Order Summary</h1>
+    </header>
 
-    <h2>Delivery Address</h2>
-    <p>{{ customer.address }}</p>
+    <div class="container order-summary">
+        <h2>Thank you for your order, {{ username }}!</h2>
 
-    <p>Your order will be delivered to this location shortly. Thank you for choosing Meal Mate!</p>
+        <h3>Delivery Address</h3>
+        <p>{{ customer.address }}</p>
 
-    {% if cart_items %}
-        <a href="{% url 'customer_menu' cart_items.0.restaurant.id username %}">Back to Restaurants</a>
-    {% else %}
-        <a href="/">Back to Home</a>
-    {% endif %}
+        <p>Your order will be delivered to this location shortly. Thank you for choosing Meal Mate!</p>
+
+        {% if cart_items %}
+            <a href="{% url 'customer_menu' cart_items.0.restaurant.id username %}">Back to Restaurant</a>
+        {% else %}
+            <a href="/">Back to Home</a>
+        {% endif %}
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 Meal Mate. All Rights Reserved.</p>
+    </div>
+
 </body>
 </html>
