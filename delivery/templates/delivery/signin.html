@@ -6,18 +6,122 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'delivery/css/styles.css' %}">
     <title>Sign In</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f3f4f7;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h3 {
+            color: #333;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        label {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1em;
+            color: #333;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #528FF0;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #528FF0;
+            color: white;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #4171c1;
+        }
+
+        .form-footer {
+            margin-top: 20px;
+        }
+
+        .form-footer a {
+            color: #528FF0;
+            font-size: 1em;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .form-footer a:hover {
+            color: #4171c1;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h3 {
+                font-size: 1.5em;
+            }
+
+            input, button {
+                font-size: 1em;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h3>Sign in below:</h3>
-    <form method="POST" action="{% url 'handle_login' %}">
-        {% csrf_token %}
-        <label>Username </label>
-        <input type="text" name="username">
-        <br><br>
-        <label>Password </label>
-        <input type="password" name="password">
-        <br><br>
-        <button type="submit">SIGN IN</button>
-    </form>
+    <div class="container">
+        <h3>Sign in below:</h3>
+        <form method="POST" action="{% url 'handle_login' %}">
+            {% csrf_token %}
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" required>
+
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" required>
+
+            <button type="submit">SIGN IN</button>
+        </form>
+        
+        <div class="form-footer">
+            <p>Don't have an account? <a href="{% url 'signup' %}">Sign Up</a></p>
+        </div>
+    </div>
 </body>
 </html>
